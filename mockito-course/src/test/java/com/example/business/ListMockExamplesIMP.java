@@ -1,7 +1,12 @@
 package com.example.business;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -41,6 +46,22 @@ public class ListMockExamplesIMP {
 			List listMock = mock(List.class);
 			when(listMock.get(anyInt())).thenThrow(new RuntimeException());
 			listMock.get(5);
+		}
+		
+		
+		// Using BDD
+		@Test
+		public void letsMockListGet_usingBDD() {
+			
+			//Given
+			List<String> listMock = mock(List.class);
+			given(listMock.get(0)).willReturn("se7en");
+			
+			//When
+			String firstElement = listMock.get(0);
+			
+			//Than
+			assertThat(firstElement, is("se7en"));
 		}
 
 }
